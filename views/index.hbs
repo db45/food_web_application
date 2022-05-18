@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma Cups</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    
+
+
+<header>
+
+    <a href="#" class="logo"><i class="fas fa-seedling"></i>Sigma Cups</a>
+
+    <nav class="navbar">
+        <a class="active" href="#home">home</a>
+        <a href="#dishes">dishes</a>
+        <a href="#about">about</a>
+        <a href="#menu">menu</a>
+        <a href="#review">review</a>
+        <a href="#order">order</a>
+        <a href="#ContactUs">ContactUs</a>
+    </nav>
+
+    <div class="icons">
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <i class="fas fa-search" id="search-icon"></i>
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+    </div>
+
+</header>
+
+    <form action="" id="search-form" autocomplete="off">
+        <div class="autocomplete" style="margin-right: 20px;">
+            <input id="myInput" type="search" placeholder="Explore Menu...">
+        </div>
+        <label for="search-box" class="fas fa-search"></label>
+        <i class="fas fa-times" id="close"></i>
+    </form>
+
+<script>
+    var menu_items = ["burger(veg/non veg)","chicken Burger","chicken tikka","chicken pizza","chicken drumsticks","cocktails","CREPE (Veg/Non-Veg)","fudge stuffed cookie","Grilled chicken","momos(veg/nonveg)","orange juice","pizza(veg/non veg)","pan cakes","soft drinks","waffels"];
+    function autocomplete(inp, arr) {
+ 
+  var currentFocus;
+  /execute a function when someone writes in the text field:/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /close any already open lists of autocompleted values/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /create a DIV element that will contain the items (values):/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /append the DIV element as a child of the autocomplete container:/
+      this.parentNode.appendChild(a);
+      /for each item in the array.../
+      for (i = 0; i < arr.length; i++) {
+        /check if the item starts with the same letters as the text field value:/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /create a DIV element for each matching element:/
+          b = document.createElement("DIV");
+          /make the matching letters bold:/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /insert a input field that will hold the current array item's value:/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /execute a function when someone clicks on the item value (DIV element):/
+              b.addEventListener("click", function(e) {
+              /insert the value for the autocomplete text field:/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              
+              closeAllLists()()
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /execute a function presses a key on the keyboard:/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        
+        currentFocus++;
+        /and and make the current item more visible:/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+       
+        currentFocus--;
+        /and and make the current item more visible:/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /If the ENTER key is pressed, prevent the form from being submitted,/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /and simulate a click on the "active" item:/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /a function to classify an item as "active":/
+    if (!x) return false;
+    /start by removing the "active" class on all items:/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /add class "autocomplete-active":/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /a function to remove the "active" class from all autocomplete items:/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+/execute a function when someone clicks in the document:/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+
+autocomplete(document.getElementById("myInput"), menu_items);
+</script>
+
+
+<section class="home" id="home">
+
+    <div class="swiper-container home-slider">
+
+        <div class="swiper-wrapper wrapper">
+
+            <div class="swiper-slide slide">
+                <br><br><br>
+                <div class="content">
+                    <span>EAT,ENJOY THE TRUE TASTE</span>
+                   <h3></h3>
+                    <p>Get 50% Off On your first 2 Orders</p>
+                    <a href="#" class="btn">Order Now</a>
+                </div>
+                <div class="image">
+                    <img src="images/home-img-3.png" alt="">
+                </div>
+                <br><br><br><br>
+            </div>
+            
+            <div class="swiper-slide slide">
+                <br><br><br>
+                <div class="content">
+                    <span>GOOD FOOD  GOOD MOOD</span>
+                    <h3></h3>
+                    <p>Want a delicious meal, but no time we will deliver it hot and yummy </p>
+                    <a href="#" class="btn">Explore menu</menu></a>
+                </div>
+                <div class="image">
+                    <img src="images/home-img-2.png" alt="">
+                </div>
+                <br><br><br>
+            </div>
+            
+            <div class="swiper-slide slide">
+                <br><br><br><br>
+                <div class="content">
+                    <span>FRESHNESS IN EVERYBITE</span>
+                    <h3></h3>
+                    <p>Delivering smiles to the people of hyderbad since 2018</p>
+                    <a href="#" class="btn">Explore Menu</Menu></a>
+                </div>
+                <div class="image">
+                    <img src="images/2.jpg" alt="">
+                </div>
+                <br><br><br>
+            </div>
+            
+        </div>
+
+        <div class="swiper-pagination"></div>
+
+    </div>
+
+</section>
+
+
+<br><br><br>
+<section class="dishes" id="dishes" style="margin-top: 40px;">
+
+    <h3 class="sub-heading"> Our Dishes </h3>
+    <h1 class="heading">Most Popular Dishes </h1>
+
+    <div class="arrows prev"></div>
+    <div class="arrows next"></div>
+
+
+    <div class="box-container">
+
+        
+        <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-eye"></a>
+            <img src="images/dish-1.png" alt="">
+            <h3>CHICKEN BURGER </h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span> ₹ 80</span>
+            <a href="#" class="btn">add to cart</a>
+        </div>
+
+        <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-eye"></a>
+            <img src="images/tikka 2.jpg" alt="">
+            <h3>CHICKEN TIKKA </h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span>₹150</span>
+            <a href="#" class="btn">add to cart</a>
+        </div>
+
+        <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-eye"></a>
+            <img src="images/Grilled chicken.jpg" alt="">
+            <h3>GRILLED CHICKEN</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span>₹ 299</span>
+            <a href="#" class="btn">add to cart</a>
+        </div>
+
+
+        <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-eye"></a>
+            <img src="images/pizzaa.jpg" alt="">
+            <h3>CHICKEN PIZZA</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span>₹ 129</span>
+            <a href="#" class="btn">add to cart</a>
+        </div>
+
+        <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-eye"></a>
+            <img src="images/chicken drum stick.jpg" alt="">
+            <h3>CHICKEN DRUMSTICKS</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span>₹ 199</span>
+            <a href="#" class="btn">add to cart</a>
+        </div>
+
+        <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-eye"></a>
+            <img src="images/dish-5.png" alt="">
+            <h3>FUDGE STUFFED COOKIE </h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span>₹ 59</span>
+            <a href="#" class="btn">add to cart</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="about" id="about">
+
+    <h3 class="sub-heading"> about us </h3>
+    <h1 class="heading"> What People's Say About SIGMACUPS? </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="images/about-img.png" alt="">
+        </div>
+
+        <div class="content">
+            <h3>Best Food in the Street</h3>
+            <p>Customers use our platform to search and discover restaurants, read and write customer generated reviews and view and upload photos, order food delivery, book a table and make payments while dining-out at restaurants. On the other hand, we provide restaurant partners with industry-specific marketing tools which enable them to engage and acquire customers to grow their business while also providing a reliable and efficient last mile delivery service</p>
+            <div class="icons-container">
+                <div class="icons">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>free delivery</span>
+                </div>
+                <div class="icons">
+                    <i class="fas fa-rupee-sign"></i>
+                    <span>easy payments</span>
+                </div>
+                <div class="icons">
+                    <i class="fas fa-headset"></i>
+                    <span>24/7 service</span>
+                </div>
+            </div>
+            <a href="#" class="btn">Explore our story</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="menu" id="menu">
+
+    <h3 class="sub-heading"> our menu </h3>
+    <h1 class="heading"> today's specials </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div class="image">
+                <img src="images/83803915.jpg">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Momos(Veg/Non-Veg)</h3>
+                <p>Chicken steam momo,Tandoori Momo,Panner(or)Mushroom Momo,Chilly Momo </a>
+                    <a href="#" class="btn">add to cart</a>
+                     <span class="price">₹ 100</span>
+            </div>
+        </div>
+
+       <div class="box">
+            <div class="image">
+                <img src="images/veg pizza.jpg" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Pizza(veg/non-veg)</h3>
+                <p>Panner(or) Vegetable pizza , Chicken cheese Pizza,BBQ Chicken Pizza with Fresh Mozzarella and Pickled Jalapeños.</p>
+                <a href="#" class="btn">add to cart</a>
+                <span class="price">₹ 299</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/menu-2.jpg" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Burger (Veg/Non-Veg)</h3>
+                <p>Chilli burger With Pepper,Crunchy Chicken Burger,Mushroom Burger,Desi Indian Burger</p>
+                <a href="#" class="btn">add to cart</a>
+                <span class="price">₹ 129</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/menu-4.jpg" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Waffle</h3>
+                <p>Belgium Waffle, American Waffle, Toaster Waffle, Hong Kong Egg Waffle Liege Waffle,Pizzelle,Waffle Cone..</p>
+                <a href="#" class="btn">add to carhhhhhhhhhhhhhhhhhhhhht</a>
+                <span class="price">₹ 88</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/menu-5.jpg" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Pan Cakes</h3>
+                <p>Cocoa pancakes,American-Style Pancakes, Scotch Pancakes,Chocolate Pancakes,</p>
+                <a href="#" class="btn">add to cart</a>
+                <span class="price">₹ 59</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/menu-3.jpg" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>CREPE (Veg/Non-Veg)</h3>
+                <p>Steak, Spinach, and MushroomChicken, Bacon, Avocado, and Cheese Beer, Cinnamon, Chocolate,Tomatoes</p>
+                <a href="#" class="btn">add to cart</a>
+                <span class="price">₹ 159</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/menu-7.jpg" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Cocktails<h3>
+                    <p style="font-style:normal;">Old Fashioned Negroni,Whiskey Sour,Dry Martini,Daiquiri, Margarita,Manhattan,Mule,Mojito.<p>
+                <a href="#" class="btn">add to cart</a>
+                <span class="price">₹ 80</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/drinks.jpg" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Soft drinks</h3>
+                <p>CocaCola,ThumsUp,Pepsi,Sprite,Fanta,
+                    Maaza,7Up,MountainDew,Red Bull,Limca</p>
+                 <a href="#" class="btn">add to cart</a>
+                    <span class="price">₹  20</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/menu-9.jpg" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Orange juice</h3>
+                <p>Orange juice,lemon juice Lorem,Florida's Natural,Florida's Natural. </p>
+                <a href="#" class="btn">add to cart</a>
+                <span class="price">₹ 25</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<section class="review" id="review">
+
+    <h3 class="sub-heading"> review </h3>
+    <h1 class="heading">That's what our coustomer says </h1>
+
+    <div class="swiper-container review-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="images/pic 1.jpg" alt="">
+                    <div class="user-info">
+                        <h3>vaibhav mittal</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>Absolutely amazing! The place is beautiful and staff are super friendly and the food is delicious. It’s definitely not like other expensive restaurants and you only get a small amount of food. I am definitely going back.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="images/pic 2.jpg" alt="">
+                    <div class="user-info">
+                        <h3>Praveen kumar</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p> Phenomenal experience. Top notch food, atmosphere, and wait staff. Have been here multiple times, and every time is an amazing experience all around. I always take my out of town guests here. Definitely a lifetime customer.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="images/PIC 3.jpg" alt="">
+                    <div class="user-info">
+                        <h3>tanya</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>Amaazing food! The whole experience from start to finish is great waitress is always so friendly and kind. The food can’t get better and the prices are fair for the portion size. Always a great spot to get great food..</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="images/pic 4.jpg" alt="">
+                    <div class="user-info">
+                        <h3>Laxmi prasana</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>Delicious high quality plates, selection of wines and great service.
+                    We tried all their entrees, one of their desserts, and everything was de-li-cious. Highly recommended. Doesn’t matter what I get I end up liking it</p>
+            </div>
+
+        </div>
+
+    </div>
+    
+</section>
+
+>
+
+<section class="order" id="order">
+
+    <h3 class="sub-heading"> order now </h3>
+    <h1 class="heading"> fast delivery </h1>
+
+    <form id="form"action="" method="post">
+
+        <div class="inputBox">
+            <div class="input" aria-required="true">
+                <span>your name</span>
+                <input type="text" placeholder="enter your name" required>
+            </div>
+            <div class="input">
+                <span>your number</span>
+                <input type="number" placeholder="enter your number" required>
+            </div>
+        </div>
+        <div class="inputBox">
+            <div class="input">
+                <span>your order</span>
+                <input type="text" placeholder="enter food name" required>
+            </div>
+            <div class="input">
+                <span>additional food</span>
+                <input type="test" placeholder="extra with food">
+            </div>
+        </div>
+        <div class="inputBox">
+            <div class="input">
+                <span>how musch</span>
+                <input type="number" placeholder="how many orders" required>
+            </div>
+            <div class="input">
+                <span>date and time</span>
+                <input type="datetime-local" required>
+            </div>
+        </div>
+        <div class="inputBox">
+            <div class="input" aria-required="true">
+                <span>your address</span>
+                <textarea name="" placeholder="enter your address" id="" cols="30" rows="10" required></textarea required>
+            </div>
+            <div class="input">
+                <span>your message</span>
+                <textarea name="" placeholder="enter your message" id="" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+
+        <input type="submit" value="order now" class="btn">
+
+    </form>
+
+</section>
+
+
+<section class="footer" id="ContactUs">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>location</h3>
+            <a href="https://www.google.com/maps/place/Madhapur,+Telangana/@17.4484363,78.3741361,14z/data=!3m1!4b1!4m5!3m4!1s0x3bcb9158f201b205:0x11bb">HYDERBAD</a>
+           
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="https://globfone.com/call-phone-online">+91 9059471481</a>
+            <a href="https://globfone.com/call-phone-online">+91 9398444269</a>
+            <a href="https://mail.google.com/mail/u/0/#inbox?compose=new">SIGMACUPS@gmail.com</a>
+            <a href="https://www.google.com/maps/place/Forum+Sujana+Mall/@17.4842909,78.3867024,17z/data=!3m1!4b1!4m5!3m4!1s0x3bcb91ab9aec640f:0xa9a53f886647f4c0!8m2!3d17.4842858!4d78.3888911">HYDERBAD, INDIA -500022 </a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="https://www.facebook.com/profile.php?id=100011817721294class="class="footer_img"><img src="https://img.icons8.com/ios-filled/30/000000/facebook-new.png"/></a>
+            <a href="https://www.instagram.com/the_assassiner__/" class="footer_img"><img src="https://img.icons8.com/ios-filled/30/000000/instagram-new.png"/></a> 
+            <a href="https://twitter.com/RohithRagam" class="footer_img"><img src="https://img.icons8.com/ios-glyphs/30/000000/twitter--v1.png"/></a>           
+        </div>
+
+        
+    </div>
+
+
+</section>
+
+<div class="loader-container">
+    <img src="images/loader.gif" alt="">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
